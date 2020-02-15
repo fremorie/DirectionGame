@@ -1,0 +1,9 @@
+@import '../../styles/constants.scss';
+
+.ground {
+  position: absolute;
+  height: $groundHeight;
+  width: $aquariumWidth;
+  top: $aquariumHeight - $groundHeight;
+  background-image: url('ground.svg');
+}

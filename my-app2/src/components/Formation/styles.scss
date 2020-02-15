@@ -1,0 +1,26 @@
+@import '../../styles/constants.scss';
+
+@keyframes formationFloating {
+    from {
+       left: -$aquariumWidth / 2;
+    }
+    to {
+        left: $aquariumWidth;
+    }
+}
+
+.row {
+}
+
+.formation {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+
+    top: $aquariumHeight / 4;
+
+    animation: formationFloating;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
