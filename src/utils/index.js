@@ -3,25 +3,27 @@
 export const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
 
 const DIRECTION = {
-    UP: 'up',
-    DOWN: 'down',
-    LEFT: 'left',
-    RIGHT: '',
+    UP: 'UP',
+    DOWN: 'DOWN',
+    LEFT: 'LEFT',
+    RIGHT: 'RIGHT',
 };
+
+const DIRECTION_NAMES = Object.keys(DIRECTION);
 
 export const generateFormation = ({nRows, maxItemsPerRow}) => {
     const formation = [];
 
     const generalDirectionIndex = getRandomInt(4);
-    const generalDirection = DIRECTION[Object.keys(DIRECTION)[generalDirectionIndex]];
+    const generalDirection = DIRECTION[DIRECTION_NAMES[generalDirectionIndex]];
 
-    const availableDirections = Object.keys(DIRECTION).filter(direction => direction !== generalDirection);
+    const availableDirections = DIRECTION_NAMES.filter(direction => direction !== generalDirection);
     const targetDirectionIndex = getRandomInt(availableDirections.length - 1);
 
     const targetDirection = DIRECTION[availableDirections[targetDirectionIndex]];
 
     const centralRow = Math.floor(nRows / 2);
-    console.log({centralRow, targetDirection});
+    console.log({centralRow, targetDirection, generalDirection, availableDirections, targetDirectionIndex});
 
     for (let i = 0; i < nRows; i++) {
         const itemsInRow = Math.floor(getRandomInt(maxItemsPerRow) / 2) * 2 + 1;
@@ -36,5 +38,5 @@ export const generateFormation = ({nRows, maxItemsPerRow}) => {
         formation.push(row);
     }
 
-    return formation;
+    return {formation, targetDirection};
 };

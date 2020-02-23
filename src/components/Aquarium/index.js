@@ -1,10 +1,10 @@
 // @flow
 import React, {type Node} from 'react';
-import {withHandlers, compose} from 'recompose';
+import {withHandlers, withProps, compose} from 'recompose';
 import {connect} from 'react-redux';
 
 // utils
-import {getRandomInt} from '../../utils';
+import {generateFormation, getRandomInt} from '../../utils';
 import type {InitialState} from '../../types';
 import {ARROWS} from '../../constants';
 
@@ -13,6 +13,8 @@ import {processAnswer as processAnswerAction} from '../../actions';
 
 // components
 import Ground from '../Ground';
+import Formation from '../Formation';
+import Bubbles from '../Bubbles';
 
 // styles
 import './styles.scss';
@@ -24,6 +26,9 @@ type MappedProps = {
 
 type EnhancedProps = MappedProps & {
     processAnswer: () => void,
+    formation: string[],
+    targetDirection: string,
+    formationCss: string,
 }
 
 type Props = {
@@ -31,19 +36,13 @@ type Props = {
     children: Node[],
 } & EnhancedProps;
 
-const Aquarium = ({bubblesCount = 10, children, onKeyDown}: Props) => {
+const Aquarium = ({bubblesCount = 10, formation, onKeyDown}: Props) => {
     const bubbles = new Array(bubblesCount).fill(0);
 
     return (
         <div className="aquarium" tabIndex="0" onKeyDown={onKeyDown}>
-            <div className="bubbles">
-                {
-                    bubbles.map((bubble, index) =>
-                        <div key={index} className={`bubble bubble-${getRandomInt(bubblesCount)}`}/>
-                    )
-                }
-            </div>
-            {children}
+            <Bubbles bubblesCount={bubblesCount} />
+            <Formation formation={formation} />
             <Ground />
         </div>
     );
@@ -63,14 +62,27 @@ const enhance = compose(
         mapStateToProps,
         mapDispatchToProps,
     ),
+    withProps(() => {
+        const {formation, targetDirection} = generateFormation({nRows: 7, maxItemsPerRow: 7});
+
+        return {
+            formation,
+            targetDirection,
+        }
+    }),
     withHandlers({
-        onKeyDown: ({processAnswer}) => e => {
-            console.log('ololo');
-            console.log({e});
-            console.log(e.keyCode);
-            if (ARROWS.hasOwnProperty(e.keyCode.toString())) {
-                console.log('пойдет в стейт', ARROWS[e.keyCode]);
-                processAnswer(ARROWS[e.keyCode]);
+        onKeyDown: ({processAnswer, targetDirection, formationCss}) => e => {
+            const arrowKeyPressed = e.keyCode.toString();
+
+            if (ARROWS.hasOwnProperty(arrowKeyPressed)) {
+                const isAnswerCorrect = ARROWS[arrowKeyPressed] === targetDirection;
+                processAnswer(isAnswerCorrect);
+
+                // delete and add class to restart the formation animation
+                const formation = document.querySelector('.formation');
+                formation.classList.remove('animated');
+                void formation.offsetWidth;
+                formation.classList.add('animated');
             }
         },
     })

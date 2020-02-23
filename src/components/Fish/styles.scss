@@ -11,6 +11,24 @@
     }
 }
 
+@mixin floating($ownDeg, $direction) {
+    @keyframes fishFloating-#{$direction} {
+        from {
+            transform: rotate($ownDeg - 5deg);
+            top: -10px;
+        }
+        to {
+            transform: rotate($ownDeg + 5deg);
+            top: 10px
+        }
+    }
+
+    animation: fishFloating-#{$direction};
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 .fish {
     background-image: url('fish.svg');
     background-repeat:no-repeat;
@@ -18,22 +36,21 @@
     height: $fishSize;
     width: $fishSize;
 
-    animation: fishFloating;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-
     position: relative;
+    @include floating(0deg, 'right');
 }
 
-.down {
+.DOWN {
     transform: rotate(90deg);
+    @include floating(90deg, 'down');
 }
 
-.left {
+.LEFT {
     transform: rotate(180deg);
+    @include floating(180deg, 'left');
 }
 
-.up {
+.UP {
     transform: rotate(-90deg);
+    @include floating(-90deg, 'up');
 }

@@ -2,7 +2,7 @@
 
 @keyframes formationFloating {
     from {
-       left: -$aquariumWidth / 2;
+       left: 50px;
     }
     to {
         left: $aquariumWidth;
@@ -19,7 +19,9 @@
     position: absolute;
 
     top: $aquariumHeight / 4;
+}
 
+.animated {
     animation: formationFloating;
     animation-duration: 20s;
     animation-iteration-count: infinite;

@@ -1,16 +1,13 @@
 // @flow
-import React, {Fragment} from 'react';
-import {compose, withProps} from 'recompose';
+import React from 'react';
 
 import './styles.scss';
-
-import {generateFormation} from '../../utils';
 
 import Fish from '../Fish';
 
 const Formation = ({formation}) => {
     return (
-        <div className="formation">
+        <div className="formation animated">
             {formation.map((row, i) => (
                 <div key={i} className="row">
                     {row.map((direction, j) => (
@@ -22,12 +19,4 @@ const Formation = ({formation}) => {
     )
 };
 
-const enhance = compose(
-    withProps(() => (
-        {
-            formation: generateFormation({nRows: 7, maxItemsPerRow: 7}),
-        }),
-    ),
-);
-
-export default enhance(Formation);
+export default Formation;

@@ -8,8 +8,8 @@ export const INITIAL_STATE: InitialState = {
 };
 
 export const ARROWS = {
-    '40': 'down',
-    '39': 'right',
-    '38': 'up',
-    '37': 'left',
+    '40': 'DOWN',
+    '39': 'RIGHT',
+    '38': 'UP',
+    '37': 'LEFT',
 };
