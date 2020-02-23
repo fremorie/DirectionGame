@@ -6,17 +6,15 @@ import './styles.scss';
 
 import {generateFormation} from '../../utils';
 
-import Pacman from '../Pacman';
+import Fish from '../Fish';
 
 const Formation = ({formation}) => {
-    console.log({formation});
-
     return (
         <div className="formation">
             {formation.map((row, i) => (
                 <div key={i} className="row">
                     {row.map((direction, j) => (
-                        <Pacman key={j} direction={direction} />
+                        <Fish key={j} direction={direction} />
                     ))}
                 </div>
             ))}

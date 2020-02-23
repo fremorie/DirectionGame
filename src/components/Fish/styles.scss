@@ -1,0 +1,39 @@
+@import '../../styles/constants';
+
+@keyframes fishFloating {
+    from {
+        transform: rotate(-5deg);
+        top: -10px;
+    }
+    to {
+        transform: rotate(5deg);
+        top: 10px
+    }
+}
+
+.fish {
+    background-image: url('fish.svg');
+    background-repeat:no-repeat;
+    background-size:contain;
+    height: $fishSize;
+    width: $fishSize;
+
+    animation: fishFloating;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+    position: relative;
+}
+
+.down {
+    transform: rotate(90deg);
+}
+
+.left {
+    transform: rotate(180deg);
+}
+
+.up {
+    transform: rotate(-90deg);
+}
