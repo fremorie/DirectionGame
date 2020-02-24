@@ -1,72 +1,74 @@
 @import '../../styles/constants';
 
 @keyframes bubble {
-  from {top: $aquariumHeight;}
-  to {top: -$aquariumHeight}
+    from {top: $aquariumHeight;}
+    to {top: -$aquariumHeight}
 }
 
 @keyframes smallBubble {
-  from {left: -$bubbleRadius}
-  to {left: $bubbleRadius / 2}
+    from {left: -$bubbleRadius}
+    to {left: $bubbleRadius / 2}
 }
 
 .bubbles {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .bubble {
-  display: inline-block;
-  height: $bubbleRadius * 2;
-  width: $bubbleRadius * 2;
-  border: 3px solid #FFF;
-  border-radius: 50%;
-  position: relative;
-  left: 20px;
-  top: 20px;
-  margin-bottom: 20px;
-  animation-name: bubble;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  &:before {
-    content: '';
-    position: absolute;
-    height: $bubbleRadius * 1.2;
-    width: $bubbleRadius * 1.2;
-    border: 2px solid #FFF;
+    display: inline-block;
+    height: $bubbleRadius * 2;
+    width: $bubbleRadius * 2;
+    border: 3px solid #FFF;
     border-radius: 50%;
-    left: $bubbleRadius;
-    top: - $bubbleRadius * 4;
-
-    animation-name: smallBubble;
-    animation-duration: 4s;
+    position: relative;
+    left: 20px;
+    top: 20px;
+    margin-bottom: 20px;
+    animation-name: bubble;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
-  &:after {
-    content: '';
-    position: absolute;
-    height: $bubbleRadius;
-    width: $bubbleRadius;
-    border: 2px solid #FFF;
-    border-radius: 50%;
-    left: $bubbleRadius * 2;
-    top: $bubbleRadius * 3.5;
 
-    animation-name: smallBubble;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-  }
+    &:before {
+        content: '';
+        position: absolute;
+        height: $bubbleRadius * 1.2;
+        width: $bubbleRadius * 1.2;
+        border: 2px solid #FFF;
+        border-radius: 50%;
+        left: $bubbleRadius;
+        top: - $bubbleRadius * 4;
 
-  @for $i from 2 through 6 {
-    &-#{$i} {
-      margin-top: $i * 60px;
-      animation-delay: -$i * 1s;
-      animation-duration: $i / 2 * 10s;
+        animation-name: smallBubble;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
     }
-  }
+
+    &:after {
+        content: '';
+        position: absolute;
+        height: $bubbleRadius;
+        width: $bubbleRadius;
+        border: 2px solid #FFF;
+        border-radius: 50%;
+        left: $bubbleRadius * 2;
+        top: $bubbleRadius * 3.5;
+
+        animation-name: smallBubble;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+
+    @for $i from 2 through 6 {
+        &-#{$i} {
+            margin-top: $i * 60px;
+            animation-delay: -$i * 1s;
+            animation-duration: $i / 2 * 10s;
+        }
+    }
 }

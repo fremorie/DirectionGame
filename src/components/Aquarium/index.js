@@ -4,9 +4,9 @@ import {withHandlers, withProps, compose} from 'recompose';
 import {connect} from 'react-redux';
 
 // utils
-import {generateFormation, getRandomInt} from '../../utils';
+import {generateFormation} from '../../utils';
 import type {InitialState} from '../../types';
-import {ARROWS} from '../../constants';
+import {ARROWS, BUBBLES_COUNT} from '../../constants';
 
 // actions
 import {processAnswer as processAnswerAction} from '../../actions';
@@ -15,6 +15,7 @@ import {processAnswer as processAnswerAction} from '../../actions';
 import Ground from '../Ground';
 import Formation from '../Formation';
 import Bubbles from '../Bubbles';
+import SeaWeed from '../SeaWeed';
 
 // styles
 import './styles.scss';
@@ -36,14 +37,13 @@ type Props = {
     children: Node[],
 } & EnhancedProps;
 
-const Aquarium = ({bubblesCount = 10, formation, onKeyDown}: Props) => {
-    const bubbles = new Array(bubblesCount).fill(0);
-
+const Aquarium = ({bubblesCount = BUBBLES_COUNT, formation, onKeyDown}: Props) => {
     return (
         <div className="aquarium" tabIndex="0" onKeyDown={onKeyDown}>
             <Bubbles bubblesCount={bubblesCount} />
             <Formation formation={formation} />
             <Ground />
+            <SeaWeed />
         </div>
     );
 };
@@ -71,7 +71,7 @@ const enhance = compose(
         }
     }),
     withHandlers({
-        onKeyDown: ({processAnswer, targetDirection, formationCss}) => e => {
+        onKeyDown: ({processAnswer, targetDirection}) => e => {
             const arrowKeyPressed = e.keyCode.toString();
 
             if (ARROWS.hasOwnProperty(arrowKeyPressed)) {

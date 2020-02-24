@@ -1,9 +1,33 @@
 @import '../../styles/constants';
 
+@keyframes highlightCorrectAnswer {
+  to {border: 3px solid green}
+}
+
+@keyframes highlightWrongAnswer {
+  to {border: 3px solid red}
+}
+
+@mixin highlightAnswer() {
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+}
+
 .aquarium {
-  width: $aquariumWidth;
-  height: $aquariumHeight;
-  background-image: linear-gradient($lightBlue, $deepBlue);
-  position: relative;
-  overflow: hidden;
+    width: $aquariumWidth;
+    height: $aquariumHeight;
+    background-image: linear-gradient($lightBlue, $deepBlue);
+    position: relative;
+    overflow: hidden;
+
+    & .wrongAnswer {
+        animation: highlightWrongAnswer;
+        @include highlightAnswer();
+    }
+
+    & .correctAnswer {
+        animation: highlightCorrectAnswer;
+        border: 3px solid green;
+    }
 }

@@ -11,7 +11,7 @@ type Props = {
     bubblesCount: number,
 };
 
-const Bubbles = ({bubblesCount = 10}: Props) => {
+const Bubbles = ({bubblesCount}: Props) => {
     const bubbles = new Array(bubblesCount).fill(0);
 
     return (

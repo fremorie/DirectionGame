@@ -13,3 +13,9 @@ export const ARROWS = {
     '38': 'UP',
     '37': 'LEFT',
 };
+
+export const BUBBLES_COUNT = 10;
+
+export const ALGEAS_COUNT = 5;
+
+export const FORMATIONS_PER_LEVEL = 10;
